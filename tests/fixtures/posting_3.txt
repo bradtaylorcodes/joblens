@@ -1,0 +1,81 @@
+Software Engineer III (Cleared)
+Colorado Springs, CO (hybrid); Aurora, CO (hybrid) or Los Angeles, CA (hybrid)
+Your Dream. Our Team.
+About Rise8
+
+Rise8 builds custom, secure software for government organizations, measuring success by impact: lives saved, time returned, and missions advanced. 
+
+We think big, start small, and scale fast with elite teams across product, design, and engineering to drive continuous delivery for critical missions.
+
+We believe customer experience starts with employee experience, so we take care of our employees. Rise8 is where you’ll do the best work of your career—supported by a culture you won’t find anywhere else. We offer competitive pay and benefits, but what sets us apart is our commitment to autonomy, growth, and a culture rooted in kindness, candor, and continuous learning. 
+
+Certified as a Great Place to Work®, with 100% of employees saying they love working here, Rise8 is where bold ideas become real capabilities. Where mission meets meaning. And where fewer bad things happen because of bad software.
+About You
+
+    You want to make tomorrow better than today. 
+    You have a passion for high-speed security and you care about risk management over compliance.
+    You believe the biggest vulnerability in any system is time. You live to securely reduce cycle time.
+    You enjoy daily decision making and real product delivery.
+    You help ensure project success and client satisfaction. 
+    You enjoy collaborative teams, pairing with team members, and inviting your clients to participate. 
+    You like to work alongside, and learn from, lean and agile leaders. 
+    You are a creative problem solver who is comfortable with uncertainty.
+    You’re a curious and keen learner who thrives on enhancing your (and our) practices and knowledge.
+    You see AI as a force multiplier, not a shortcut — and you're already weaving it into how you think, build, and ship.
+
+As a Software Engineer at Rise8, you will: 
+
+    Work with clients who have never before taken part in design thinking, test-driven-development (TDD), paired programming, continuous-release deployment, backlog management, or even interacted with the user they provide software to.
+    Teach the why behind each of these practices, be flexible to client preferences, and discover new tools that will enable your customer to understand the value that comes with agile software development.
+    Be responsible for learning how your client likes to learn, how they like to receive feedback, and what ubiquitous language they use so you can speak in terms that resonate with them.
+    Learn, teach, and change your approach constantly to best collaborate towards a new way of thinking about engineering.
+    Pair with the customer’s developers and engineers to teach them how to develop and deliver user stories that provide business value, technical feasibility, and user-driven functionality.
+    Deliver functionality by developing working software and ensure a reliable software solution.
+    Ensure that development is delivered week over week and continuously gauge feedback from real users in real time.
+    Pairing with military service people and other developers to deliver value in real time.
+    Responsible for building and testing software solutions and ensuring the team builds upon what we provide not only technically but what we can teach through our practices.
+    Work with a balanced team in mind while building software that fits the user needs, business objectives, and stakeholder vision so the team can quickly make informed engineering decisions based on validated assumptions.
+    Champion AI-augmented ways of working across your engagement(s), leveraging AI tooling to accelerate delivery, reduce cycle time, and drive better outcomes at scale.
+
+Qualifications 
+
+    Must have an active TS/SCI Security Clearance. 
+    3-6 years of Software Development experience in a variety of programming languages.
+    Strong communication skills and interest in a pair-programming environment.
+    Experience in Test Driven Development (TDD) and agile methodologies.
+    Passion for growing your skills, tackling interesting work and challenging problems.
+    Experience with PHP, Kotlin, Java, or Javascript.
+    Experience with Spring Boot, React.JS, Vue or Redux.
+    Experience with both frontend and backend.
+    Experience using container technologies such as Docker or Kubernetes.
+    Familiarity with DevSecOps tools and processes such as Git, Concourse, GitLabCI, SonarQube, Fortify, and ThreadFix.
+    Demonstrated experience with API Development.
+    You are comfortable running your software in Linux environments.
+    You have a strong understanding of algorithms, databases, design patterns, and understand how to apply them.
+    You have strong facilitation skills.
+    BA/BS in Computer Science or related field, or equivalent experience.
+
+Preferred Qualifications: 
+
+    Experience developing cloud-native applications.
+    Experience leading a product or development team.
+    Experience building and deploying in a continuous delivery environment.
+    Experience working directly with clients.
+    Strong facilitation skills.
+    Experience with DoD, especially at a DoD "Software Factory".
+    Located within a commutable distance into either Colorado Springs, CO, Aurora, CO or El Segundo, CA and can be onsite on a hybrid capacity.  
+
+Salary 
+
+The annual salary range for this role as it is posted is $119,853 - $149,817 regardless of final candidate location within the United States. The final job level and annual salary will be determined based on the education, qualification, knowledge, skills, ability, and experience of the final candidate(s), and calibrated against relevant market data and internal team equity. 
+Benefits 
+
+    Flexible schedule in a 100% distributed workforce 
+    Premium Insurance: We cover up to 100% of the employee premium and up to 80% of the combined dependent premium on our base health plan, depending on pay band. We also cover 100% of the premium for employee and dependent Dental and Vision as well as employee premiums for Life and Disability coverage.
+    Retirement: 401k match at 10% gross pay.
+    Paid time off (PTO): 4 weeks combined accrued vacation and sick leave, 11 Federal holidays, your birthday, jury duty, and bereavement.
+    Education & Training: Accrued budget of up to $3,500 per year for classes, travel, events, and materials.
+    Home Office and Merch: We offer $750 per year for home office technology and equipment as well as $100 per year for Rise8 merch from our Swag Store.
+    Wellness Budget: To encourage and support a well-rounded healthy lifestyle, we cover 100% reimbursement on a variety of wellness activities and products, up to $500 per calendar year. Or Rise8 is part of the the Life Time Corporate Partner program. In lieu of your $500 annual wellness benefit, you can instead get a $75 monthly credit towards a Life Time membership ($900 annual benefit).
+    Equipment: We offer a MacBook Pro
+

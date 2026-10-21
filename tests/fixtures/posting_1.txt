@@ -1,0 +1,60 @@
+Backend Developer, AWS
+Remote
+
+Company Overview:
+
+At Tactacam, we are a rapidly growing team of tech innovators, trail-blazers, and outdoor enthusiasts working to engineer the outdoors! We are proud to be a market-leading outdoor camera and technology company, but at our core, we are just a group of people obsessed with the great outdoors. We are far more than a technology company; we are a community that values fresh air as much as fresh ideas. As restless adventurers, we know that the best ideas rarely happen behind a desk, which is why we constantly encourage our team to get outside, use our products, and let the natural world inspire their next big breakthrough.
+
+We also operate as tech trailblazers who are moving fast. With over 500,000+ active customers worldwide and a constantly expanding product line, we are actively pushing the boundaries of what outdoor technology can do. Because "good enough" isn't in our vocabulary, we intentionally foster an environment of ambitious dreamers where every team member is encouraged to aim higher, dream bigger, and drive innovation forward. We believe that your career should be an adventure too, and our rapid growth offers limitless possibilities for career advancement, personal development, and hands-on impact
+
+Job Overview: 
+
+As a Backend Developer, you will be instrumental in the design, development, and implementation of our next-generation, highly scalable, and resilient cloud-native backend solutions on AWS. you will play a pivotal role in the development of cutting-edge mobile applications and web platforms. The ideal candidate is a skilled, solution-oriented team player with strong communication skills, capable of collaborating across multiple teams to drive project success. You’ll work closely with our product, engineering, and leadership teams to deliver high-quality solutions aligned with Tactacam’s product initiatives.
+
+ 
+
+Responsibilities:
+
+    Design, develop, and deploy backend applications and APIs using TypeScript.
+    Utilize AWS Cloud Development Kit (CDK) to define and manage cloud infrastructure as code.
+    Work extensively with NoSQL databases, particularly Amazon DynamoDB, for data storage and retrieval.
+    Develop and deploy serverless functions using AWS Lambda.
+    Collaborate with frontend developers and other stakeholders to define and implement application requirements.
+    Write clean, well-documented, and testable code.
+    Participate in code reviews and contribute to improving development processes.
+    Troubleshoot and resolve production issues.
+    Stay up-to-date with the latest AWS technologies and best practices.
+
+ 
+
+Requirements:
+
+    3+ years of experience in system design or architecture, including knowledge of design patterns, reliability, and scalability.
+    Proficiency in TypeScript.
+    Experience with AWS Cloud Development Kit (CDK).
+    Strong knowledge of Amazon DynamoDB.
+    Experience developing and deploying AWS Lambda functions.
+    Familiarity with RESTful API design and development.
+    Experience with version control systems (e.g., Git).
+    Excellent problem-solving and communication skills.
+    AWS Associate-level certification or higher, preferred
+
+Why you want to work here
+
+    Comprehensive Health & Wellness: Includes medical, dental, and vision coverage, along with life insurance and disability protection.
+    Generous Paid Leave: Offers competitive time off and in addition to pregnancy leave,  parental and military leave, and unique "Hunting Holidays" for outdoor activities.
+    Financial Planning: Supports future retirement goals through a company-managed 401(k) plan.
+    Outdoor-Centric Culture: Features remote-first flexibility, employee discounts, complimentary camera gear, company-sponsored outdoor trips, and community projects.
+    Recognition & Values: Honors top performance through monthly "TactaValor Awards" that celebrate company values like innovation, tenacity, and customer focus.
+
+ 
+
+Location Limitations:
+
+Please note at this time, we are not accepting applications from candidates based in Alaska (AK), Connecticut (CT), Delaware (DE), Massachusetts (MA), New Mexico (NM), and South Dakota (SD) 
+
+ 
+
+Equal Opportunity Employer:
+
+Tactacam is an equal opportunity employer and does not discriminate against any applicant or employee based on race, color, religion, sex, sexual orientation, gender identity, national origin, age, disability, genetic information, or any other protected status. We are committed to providing a fair and inclusive work environment for all, and we encourage individuals of all backgrounds to apply for our open positions. If you require reasonable accommodation during the application process, please let us know, and we will be happy to assist.
