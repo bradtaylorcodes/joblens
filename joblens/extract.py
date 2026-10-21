@@ -16,7 +16,11 @@ def extract(text: str) -> JobPosting | None:
     msg = client.messages.parse(
         model=MODEL,
         max_tokens=1024,
-        system="Extract structured data from the job posting.",
+        system=(
+            "Extract structured data from the job posting. "
+            "Use only information stated in the posting. "
+            "If a field is not stated, return null; do not infer or guess."
+        ),
         messages=[{"role": "user", "content": text}],
         output_format=JobPosting,
     )
@@ -24,6 +28,7 @@ def extract(text: str) -> JobPosting | None:
         raise ExtractionError("Output truncated at max_tokens; JSON may be incomplete")
     if msg.stop_reason == "refusal":
         raise ExtractionError("Model refused to extract this posting")
+
     posting = msg.parsed_output
     if posting is not None and posting.salary_currency is None:
         posting.salary_currency = DEFAULT_CURRENCY  # business rule, not a model guess
