@@ -1,4 +1,5 @@
 import anthropic
+from anthropic.types import Usage
 
 from joblens.schema import JobPosting
 
@@ -9,10 +10,16 @@ client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
 
 
 class ExtractionError(Exception):
-    pass
+    def __init__(self, message: str, usage: Usage | None = None):
+        super().__init__(message)
+        self.usage = usage  # failed calls still cost tokens
 
 
 def extract(text: str) -> JobPosting | None:
+    return extract_with_usage(text)[0]
+
+
+def extract_with_usage(text: str) -> tuple[JobPosting | None, Usage]:
     msg = client.messages.parse(
         model=MODEL,
         max_tokens=1024,
@@ -25,11 +32,13 @@ def extract(text: str) -> JobPosting | None:
         output_format=JobPosting,
     )
     if msg.stop_reason == "max_tokens":
-        raise ExtractionError("Output truncated at max_tokens; JSON may be incomplete")
+        raise ExtractionError(
+            "Output truncated at max_tokens; JSON may be incomplete", msg.usage
+        )
     if msg.stop_reason == "refusal":
-        raise ExtractionError("Model refused to extract this posting")
+        raise ExtractionError("Model refused to extract this posting", msg.usage)
 
     posting = msg.parsed_output
     if posting is not None and posting.salary_currency is None:
         posting.salary_currency = DEFAULT_CURRENCY  # business rule, not a model guess
-    return posting
+    return posting, msg.usage
