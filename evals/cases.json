@@ -1,0 +1,57 @@
+[
+  {
+    "fixture": "posting_1.txt",
+    "expected": {
+      "company": "Tactacam",
+      "work_mode": "remote",
+      "salary_min": null,
+      "salary_max": null,
+      "salary_currency": "USD",
+      "discipline": "backend"
+    }
+  },
+  {
+    "fixture": "posting_2.txt",
+    "expected": {
+      "company": "Honeycomb",
+      "work_mode": "remote",
+      "salary_min": 160000,
+      "salary_max": 180000,
+      "salary_currency": "USD",
+      "discipline": "fullstack"
+    }
+  },
+  {
+    "fixture": "posting_3.txt",
+    "expected": {
+      "company": "Rise8",
+      "work_mode": "hybrid",
+      "salary_min": 119853,
+      "salary_max": 149817,
+      "salary_currency": "USD",
+      "discipline": "backend"
+    }
+  },
+  {
+    "fixture": "posting_4.txt",
+    "expected": {
+      "company": "DoorDash",
+      "work_mode": "hybrid",
+      "salary_min": 130600,
+      "salary_max": 192000,
+      "salary_currency": "USD",
+      "discipline": "backend"
+    }
+  },
+  {
+    "fixture": "posting_5.txt",
+    "expected": {
+      "company": "Stripe",
+      "work_mode": "hybrid",
+      "salary_min": 172000,
+      "salary_max": 258000,
+      "salary_currency": "CAD",
+      "discipline": "frontend"
+    }
+  }
+]

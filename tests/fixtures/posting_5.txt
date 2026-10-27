@@ -1,0 +1,56 @@
+Frontend Engineer, Expansion
+Who we are
+About Stripe
+
+Stripe is a financial infrastructure platform for businesses. Millions of companies—from the world’s largest enterprises to the most ambitious startups—use Stripe to accept payments, grow their revenue, and accelerate new business opportunities. Our mission is to increase the GDP of the internet, and we have a staggering amount of work ahead. That means you have an unprecedented opportunity to put the global economy within everyone’s reach while doing the most important work of your career.
+About the team
+
+Web Presence and Platform is organized into two pillars, each of which is grouped into pods that focus on the central tenets of Stripe's public mission. The Presence pillar creates industry-leading designs for Stripe’s front door surfaces, educating customers about the power of our platform, sharing Stripe’s ideas and expertise with the public, and driving adoption. The Platform pillar builds the internal machinery that powers these surfaces, and is responsible for making our websites fast, stable, and easy to update.
+
+Together we design and build stripe.com and other sites that amount to what is, for many, their first impression of Stripe. As such, WPP offers exciting opportunities to have a major impact on Stripe’s success. We want to make every pixel count, we want it to be enthralling, and we want to help other Stripes seamlessly benefit from our systematic work.
+What you’ll do
+
+The Expansion pod brings creativity and executional rigor to attracting new prospects and driving conversion, focusing on user journeys, interactive and highly polished tools for users, and building targeted experiences for our global users.
+
+As a frontend engineer you will reimagine the user experience moments that contribute to acquisition journeys. You will build delightful and original interactive tools and resources that attract users. You will collaborate deeply across design, engineering, and cross-functional teams and work across teams and tech stacks to create new site capabilities.  You’ll enable prospective clients to self-select into the right Stripe product lines, bring additional partners into the authoring process while upholding our high quality bar, and directly impact Stripe’s success by marrying data-driven rigor with our deep commitment to craft.
+Responsibilities
+
+    Work closely with other engineers, pairing, mentoring, and continually building a culture of excellence
+    Build beautiful, best-in-class end-user experiences to solve complex problems
+    Utilize, maintain, and extend our design systems
+    Integrate our web platform with self-serve authoring and experimentation
+
+Who you are
+
+We’re looking for someone who meets the minimum requirements to be considered for the role. If you meet these requirements, you are encouraged to apply. The preferred qualifications are a bonus, not a requirement.
+Minimum requirements
+
+    5+ years of relevant web front-end development or creative technology experience at a tech-forward, product-driven company
+    Experience writing clear, elegant code in a team environment
+    Excellent verbal and written communication
+    Passion for engineering solutions focused around growth hacking & enablement
+
+Preferred qualifications
+
+    A good understanding of the formal elements of design, not just limited to the web and including typography, layout, balance, and proportion
+    Experience building highly complex interactive tools, including state management and data fetching
+    Proficiency with React, with a focus on interactions, animation, performance, and polish
+    Experience with A/B testing, synthetic monitoring, or accessibility testing
+
+Hybrid work at Stripe
+
+This role is available either in an office or a remote location (35+ miles or 56+ km from a Stripe office).
+In-office expectations
+
+Office-assigned Stripes spend at least 50% of the time in a given month in their local office or with users. This hits a balance between bringing people together for in-person collaboration and learning from each other, while supporting flexibility about how to do this in a way that makes sense for individuals and their teams.
+Working remotely at Stripe
+
+A remote location is defined as being 35 miles (56 kilometers) or more from one of our offices. While you would be welcome to come into the office for team/business meetings, on-sites, meet-ups, and events, our expectation is you would regularly work from home rather than a Stripe office. Stripe does not cover the cost of relocating to a remote location. We encourage you to apply for roles that match the location where you currently live or plan to live.
+Pay and benefits
+
+The annual salary range for this role in the primary location is CA$172,000 - CA$258,000. This range may change if you are hired in another location. For sales roles, the range provided is the role’s On Target Earnings (“OTE”) range, meaning that the range includes both the sales commissions/sales bonuses target and annual base salary for the role. This salary range may be inclusive of several career levels at Stripe and will be narrowed during the interview process based on a number of factors, including the candidate’s experience, qualifications, and specific location. Applicants interested in this role and who are not located in the primary location may request the annual salary range for their location during the interview process.
+
+Specific benefits and details about what compensation is included in the salary range listed above will vary depending on the applicant’s location and can be discussed in more detail during the interview process. Benefits/additional compensation for this role may include: equity, company bonus or sales commissions/bonuses; retirement plans; health benefits; and wellness stipends.
+We look forward to hearing from you.
+
+At Stripe, we're looking for people with passion, grit, and integrity. You're encouraged to apply even if your experience doesn't precisely match the job description. Your skills and passion will stand out—and set you apart—especially if your career has taken some extraordinary twists and turns. At Stripe, we welcome diverse perspectives and people who think rigorously and aren't afraid to challenge assumptions. Join us.
