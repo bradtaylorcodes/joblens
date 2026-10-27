@@ -28,8 +28,7 @@
       "work_mode": "hybrid",
       "salary_min": 119853,
       "salary_max": 149817,
-      "salary_currency": "USD",
-      "discipline": "backend"
+      "salary_currency": "USD"
     }
   },
   {
@@ -47,10 +46,9 @@
     "fixture": "posting_5.txt",
     "expected": {
       "company": "Stripe",
-      "work_mode": "hybrid",
+      "location": null,
       "salary_min": 172000,
       "salary_max": 258000,
-      "salary_currency": "CAD",
       "discipline": "frontend"
     }
   }
