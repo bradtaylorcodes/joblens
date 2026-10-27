@@ -1,16 +1,45 @@
 import json
 import time
+from dataclasses import dataclass, field
 from pathlib import Path
 
-from joblens.extract import ExtractionError, extract_with_usage
+from anthropic.types import Usage
+
+from joblens.extract import ExtractionError, cost, extract_with_usage
+from joblens.schema import JobPosting
 
 RUNS = 3
-INPUT_PRICE = 2 / 1_000_000  # USD per token, Sonnet 5.5
-OUTPUT_PRICE = 10 / 1_000_000
 
 ROOT = Path(__file__).parent.parent
 CASES = ROOT / "evals" / "cases.json"
 FIX = ROOT / "tests" / "fixtures"
+
+
+@dataclass
+class Run:
+    fixture: str
+    expected: dict
+    posting: JobPosting | None
+    error: str | None
+    usage: Usage | None
+    latency: float
+
+
+@dataclass
+class FieldScore:
+    passes: int = 0
+    total: int = 0
+    failures: list[tuple] = field(default_factory=list)
+
+
+def run_once(fixture: str, expected: dict, text: str) -> Run:
+    start = time.perf_counter()
+    try:
+        posting, usage = extract_with_usage(text)
+        error = None
+    except ExtractionError as e:
+        posting, usage, error = None, e.usage, f"<error: {e}>"
+    return Run(fixture, expected, posting, error, usage, time.perf_counter() - start)
 
 
 def matches(expected, got) -> bool:
@@ -19,56 +48,52 @@ def matches(expected, got) -> bool:
     return expected == got
 
 
-def main() -> None:
-    cases = json.loads(CASES.read_text())
-    results: dict[str, dict] = {}  # field -> {passes, total, failures}
-    cost = 0.0
-    latencies: list[float] = []
+def actual(run: Run, name: str):
+    if run.posting is None:
+        return run.error or "<no output>"
+    return getattr(run.posting, name)
 
-    for case in cases:
-        fixture = case["fixture"]
-        text = (FIX / fixture).read_text()
-        for _ in range(RUNS):
-            start = time.perf_counter()
-            try:
-                posting, usage = extract_with_usage(text)
-                error = None
-            except ExtractionError as e:
-                posting, usage, error = None, e.usage, f"<error: {e}>"
-            latencies.append(time.perf_counter() - start)
-            if usage is not None:
-                cost += (
-                    usage.input_tokens * INPUT_PRICE
-                    + usage.output_tokens * OUTPUT_PRICE
-                )
 
-            for field, expected in case["expected"].items():
-                r = results.setdefault(field, {"passes": 0, "total": 0, "failures": []})
-                r["total"] += 1
-                if posting is None:
-                    got = error or "<no output>"
-                    r["failures"].append((fixture, expected, got))
-                    continue
-                got = getattr(posting, field)
-                if matches(expected, got):
-                    r["passes"] += 1
-                else:
-                    r["failures"].append((fixture, expected, got))
+def score(runs: list[Run]) -> dict[str, FieldScore]:
+    scores: dict[str, FieldScore] = {}
+    for run in runs:
+        for name, expected in run.expected.items():
+            s = scores.setdefault(name, FieldScore())
+            s.total += 1
+            got = actual(run, name)
+            if run.posting is not None and matches(expected, got):
+                s.passes += 1
+            else:
+                s.failures.append((run.fixture, expected, got))
+    return scores
 
-    for field, r in results.items():
-        print(f"{field}: {r['passes']}/{r['total']}")
-        for failure in r["failures"]:
+
+def print_report(runs: list[Run]) -> None:
+    scores = score(runs)
+    for name, s in scores.items():
+        print(f"{name}: {s.passes}/{s.total}")
+        for failure in s.failures:
             print(f"  {failure!r}")
 
-    passes = sum(r["passes"] for r in results.values())
-    total = sum(r["total"] for r in results.values())
+    passes = sum(s.passes for s in scores.values())
+    total = sum(s.total for s in scores.values())
+    latencies = [r.latency for r in runs]
+
     print()
     print(f"Overall: {passes}/{total} ({passes / total:.1%})")
-    print(f"Cost: ${cost:.4f}")
+    print(f"Cost: ${sum(cost(r.usage) for r in runs if r.usage):.4f}")
     print(
         f"Latency: mean {sum(latencies) / len(latencies):.2f}s, "
         f"max {max(latencies):.2f}s"
     )
+
+
+def main() -> None:
+    runs = []
+    for case in json.loads(CASES.read_text()):
+        text = (FIX / case["fixture"]).read_text()
+        runs += [run_once(case["fixture"], case["expected"], text) for _ in range(RUNS)]
+    print_report(runs)
 
 
 if __name__ == "__main__":

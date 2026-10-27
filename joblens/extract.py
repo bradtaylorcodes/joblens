@@ -4,6 +4,8 @@ from anthropic.types import Usage
 from joblens.schema import JobPosting
 
 MODEL = "claude-sonnet-5-5"
+INPUT_PRICE = 2 / 1_000_000  # USD per token for MODEL
+OUTPUT_PRICE = 10 / 1_000_000
 DEFAULT_CURRENCY = "USD"
 
 client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
@@ -13,6 +15,10 @@ class ExtractionError(Exception):
     def __init__(self, message: str, usage: Usage | None = None):
         super().__init__(message)
         self.usage = usage  # failed calls still cost tokens
+
+
+def cost(usage: Usage) -> float:
+    return usage.input_tokens * INPUT_PRICE + usage.output_tokens * OUTPUT_PRICE
 
 
 def extract(text: str) -> JobPosting | None:
