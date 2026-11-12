@@ -2,6 +2,12 @@
 
 ## Eval fields left out for now
 
+## Eval targets (cases to add next)
+
+- **"Competitive salary" only**: no numbers stated. Expect `salary_min`/`salary_max` = null. Tests the "return null" prompt line, which the current eval can't measure (only 3 null labels).
+- **Recruiter posting, no company name**: spec gap. `company` is `str`, so null isn't allowed. Decide: agency name, null (schema change), or reject?
+- **Onsite role**: no current case is labelled `onsite`, so that enum value is untested.
+
 ### Per-posting omissions
 
 - In posting_1.txt the `location` field was left off because the only stated location is "Remote" plus a list of excluded US states. The model could reasonably return "Remote", "United States", "Remote (US)", or `null` (treating "Remote" as a work mode, not a location).
