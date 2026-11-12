@@ -25,7 +25,9 @@ def extract(text: str) -> JobPosting | None:
     return extract_with_usage(text)[0]
 
 
-def extract_with_usage(text: str) -> tuple[JobPosting | None, Usage]:
+def extract_with_usage(
+    text: str, client: anthropic.Anthropic = client
+) -> tuple[JobPosting | None, Usage]:
     msg = client.messages.parse(
         model=MODEL,
         max_tokens=1024,
