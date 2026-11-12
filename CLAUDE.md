@@ -2,7 +2,8 @@
 LLM service that extracts structured data from job postings.
 
 ## Commands
-- Run tests: `uv run pytest` (tests call the live API and cost ~$0.01)
+- Tests: `uv run --env-file .env pytest` (test_extract.py calls the live API, ~$0.01)
+- Eval: `uv run --env-file .env python -m evals.run` (~$0.11)
 
 ## Rules
 - Use the Anthropic SDK directly; no LLM frameworks.
