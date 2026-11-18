@@ -3,9 +3,12 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import anthropic
 from anthropic.types import Usage
 
-from joblens.extract import ExtractionError, cost, extract_with_usage
+from joblens.client import make_client
+from joblens.extract import ExtractionError, extract
+from joblens.pricing import cost
 from joblens.schema import JobPosting
 
 RUNS = 3
@@ -32,11 +35,13 @@ class FieldScore:
     failures: list[tuple] = field(default_factory=list)
 
 
-def run_once(fixture: str, expected: dict, text: str) -> Run:
+def run_once(
+    fixture: str, expected: dict, text: str, client: anthropic.Anthropic
+) -> Run:
     start = time.perf_counter()
     try:
-        posting, usage = extract_with_usage(text)
-        error = None
+        result = extract(text, client)
+        posting, usage, error = result.posting, result.usage, None
     except ExtractionError as e:
         posting, usage, error = None, e.usage, f"<error: {e}>"
     return Run(fixture, expected, posting, error, usage, time.perf_counter() - start)
@@ -50,7 +55,7 @@ def matches(expected, got) -> bool:
 
 def actual(run: Run, name: str):
     if run.posting is None:
-        return run.error or "<no output>"
+        return run.error
     return getattr(run.posting, name)
 
 
@@ -89,10 +94,14 @@ def print_report(runs: list[Run]) -> None:
 
 
 def main() -> None:
+    client = make_client()
     runs = []
     for case in json.loads(CASES.read_text()):
         text = (FIX / case["fixture"]).read_text()
-        runs += [run_once(case["fixture"], case["expected"], text) for _ in range(RUNS)]
+        runs += [
+            run_once(case["fixture"], case["expected"], text, client)
+            for _ in range(RUNS)
+        ]
     print_report(runs)
 
 

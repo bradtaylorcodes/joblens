@@ -1,11 +1,14 @@
+import logging
+
 import anthropic
 import httpx
 import pytest
 from anthropic.types import Usage
 from fastapi.testclient import TestClient
 
-from joblens.api import MAX_TEXT_CHARS, app, get_extractor
-from joblens.extract import ExtractionError
+from joblens.api import app, get_extractor
+from joblens.config import MAX_TEXT_CHARS
+from joblens.extract import Extraction, ExtractionError, NoOutputError
 from joblens.schema import JobPosting
 
 POSTING = JobPosting(
@@ -19,6 +22,7 @@ POSTING = JobPosting(
     discipline="backend",
 )
 USAGE = Usage(input_tokens=500, output_tokens=80)
+RESULT = Extraction(POSTING, USAGE)
 UPSTREAM_REQ = httpx.Request("POST", "https://api.anthropic.com/v1/messages")
 SECRET = "boom-secret-upstream-detail"
 API_KEY = "test-api-key"
@@ -51,14 +55,14 @@ def use(fake: FakeExtractor) -> FakeExtractor:
 
 
 def test_happy_path(client):
-    use(FakeExtractor(result=(POSTING, USAGE)))
+    use(FakeExtractor(result=RESULT))
     r = client.post("/extract", json={"text": "Senior backend engineer at Acme"})
     assert r.status_code == 200
     assert r.json() == POSTING.model_dump()
 
 
 def test_empty_text_rejected(client):
-    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    fake = use(FakeExtractor(result=RESULT))
     r = client.post("/extract", json={"text": ""})
     assert r.status_code == 422
     assert isinstance(r.json()["detail"], str)
@@ -66,7 +70,7 @@ def test_empty_text_rejected(client):
 
 
 def test_text_too_long_rejected(client):
-    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    fake = use(FakeExtractor(result=RESULT))
     r = client.post("/extract", json={"text": "x" * (MAX_TEXT_CHARS + 1)})
     assert r.status_code == 422
     assert isinstance(r.json()["detail"], str)
@@ -78,6 +82,21 @@ def test_extraction_error_is_422(client):
     r = client.post("/extract", json={"text": "posting"})
     assert r.status_code == 422
     assert r.json() == {"detail": "Model refused to extract this posting"}
+
+
+def test_extraction_error_logs_usage(client, caplog):
+    use(FakeExtractor(error=ExtractionError("Model refused to extract this posting", USAGE)))
+    with caplog.at_level(logging.INFO, logger="joblens"):
+        client.post("/extract", json={"text": "posting"})
+    assert "status=422" in caplog.text
+    assert "input_tokens=500 output_tokens=80" in caplog.text
+
+
+def test_no_output_is_502(client):
+    use(FakeExtractor(error=NoOutputError("Model returned no structured output", USAGE)))
+    r = client.post("/extract", json={"text": "posting"})
+    assert r.status_code == 502
+    assert r.json() == {"detail": "Model returned no structured output"}
 
 
 def test_rate_limit_is_503(client):
@@ -109,7 +128,7 @@ def test_other_api_error_is_502(client):
 
 
 def test_missing_key_is_401(client):
-    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    fake = use(FakeExtractor(result=RESULT))
     del client.headers["X-API-Key"]
     r = client.post("/extract", json={"text": "posting"})
     assert r.status_code == 401
@@ -118,7 +137,7 @@ def test_missing_key_is_401(client):
 
 
 def test_wrong_key_is_401(client):
-    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    fake = use(FakeExtractor(result=RESULT))
     r = client.post(
         "/extract", json={"text": "posting"}, headers={"X-API-Key": "wrong"}
     )
@@ -128,7 +147,7 @@ def test_wrong_key_is_401(client):
 
 
 def test_unset_server_key_is_500(client, monkeypatch):
-    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    fake = use(FakeExtractor(result=RESULT))
     monkeypatch.delenv("JOBLENS_API_KEY")
     r = client.post("/extract", json={"text": "posting"})
     assert r.status_code == 500
