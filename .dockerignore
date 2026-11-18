@@ -1,0 +1,22 @@
+.env
+.env.*
+.venv
+.git
+.gitignore
+__pycache__
+**/__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.DS_Store
+.idea
+.vscode
+Dockerfile
+.dockerignore
+
+# Not needed at runtime
+tests
+evals
+NOTES.md
+CLAUDE.md
