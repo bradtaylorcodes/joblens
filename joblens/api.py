@@ -1,4 +1,6 @@
 import logging
+import os
+import secrets
 import time
 from collections.abc import Callable
 from functools import partial
@@ -9,6 +11,7 @@ from anthropic.types import Usage
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, StringConstraints
 
 from joblens.extract import ExtractionError, cost, extract_with_usage
@@ -31,6 +34,18 @@ Extractor = Callable[[str], tuple[JobPosting | None, Usage]]
 
 def get_extractor() -> Extractor:
     return partial(extract_with_usage, client=api_client)
+
+
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+
+def require_api_key(key: Annotated[str | None, Depends(api_key_header)]) -> None:
+    expected = os.environ.get("JOBLENS_API_KEY", "")
+    if not expected:
+        logger.error("JOBLENS_API_KEY is not set; rejecting request")
+        raise HTTPException(500, "Server misconfigured")
+    if key is None or not secrets.compare_digest(key.encode(), expected.encode()):
+        raise HTTPException(401, "Invalid or missing API key")
 
 
 class ExtractRequest(BaseModel):
@@ -72,7 +87,7 @@ async def validation_error(request: Request, exc: RequestValidationError):
     return JSONResponse(status_code=422, content={"detail": "; ".join(messages)})
 
 
-@app.post("/extract")
+@app.post("/extract", dependencies=[Depends(require_api_key)])
 def extract_endpoint(
     req: ExtractRequest,
     request: Request,

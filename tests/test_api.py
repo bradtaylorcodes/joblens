@@ -21,6 +21,8 @@ POSTING = JobPosting(
 USAGE = Usage(input_tokens=500, output_tokens=80)
 UPSTREAM_REQ = httpx.Request("POST", "https://api.anthropic.com/v1/messages")
 SECRET = "boom-secret-upstream-detail"
+API_KEY = "test-api-key"
+AUTH = {"X-API-Key": API_KEY}
 
 
 class FakeExtractor:
@@ -37,8 +39,9 @@ class FakeExtractor:
 
 
 @pytest.fixture
-def client():
-    yield TestClient(app)
+def client(monkeypatch):
+    monkeypatch.setenv("JOBLENS_API_KEY", API_KEY)
+    yield TestClient(app, headers=AUTH)
     app.dependency_overrides.clear()
 
 
@@ -103,3 +106,31 @@ def test_other_api_error_is_502(client):
     assert r.status_code == 502
     assert r.json() == {"detail": "Upstream error"}
     assert SECRET not in r.text
+
+
+def test_missing_key_is_401(client):
+    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    del client.headers["X-API-Key"]
+    r = client.post("/extract", json={"text": "posting"})
+    assert r.status_code == 401
+    assert r.json() == {"detail": "Invalid or missing API key"}
+    assert fake.calls == 0
+
+
+def test_wrong_key_is_401(client):
+    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    r = client.post(
+        "/extract", json={"text": "posting"}, headers={"X-API-Key": "wrong"}
+    )
+    assert r.status_code == 401
+    assert r.json() == {"detail": "Invalid or missing API key"}
+    assert fake.calls == 0
+
+
+def test_unset_server_key_is_500(client, monkeypatch):
+    fake = use(FakeExtractor(result=(POSTING, USAGE)))
+    monkeypatch.delenv("JOBLENS_API_KEY")
+    r = client.post("/extract", json={"text": "posting"})
+    assert r.status_code == 500
+    assert r.json() == {"detail": "Server misconfigured"}
+    assert fake.calls == 0
